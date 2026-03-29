@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawdi | Premium Pet Care</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === CSS VARIABLES & RESET === */
+        :root {
+            --primary: #F472B6; 
+            --primary-hover: #DB2777;
+            --secondary: #E0F2FE; 
+            --accent: #FEF9C3; 
+            --bg-color: #FAFAF9; 
+            --text-dark: #374151;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+            --border-radius: 24px;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Quicksand', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-dark); overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; outline: none; transition: var(--transition); font-family: 'Quicksand', sans-serif; }
+        
+        /* === UTILITY CLASSES === */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .hidden { display: none !important; }
+        .btn { padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background-color: var(--primary); color: var(--white); box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4); }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+        .btn-primary:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+        .btn-outline:hover { background-color: var(--primary); color: var(--white); }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-dark); }
+        .fade-in { animation: fadeIn 0.5s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* === TOP BANNER & HEADER === */
+        .top-banner { background-color: var(--secondary); color: var(--text-dark); text-align: center; padding: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; }
+        header { background-color: var(--white); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 2rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        
+        .nav-links { display: flex; gap: 30px; font-weight: 600; }
+        .nav-links li:hover { color: var(--primary); transition: var(--transition); }
+        
+        .nav-icons { display: flex; gap: 20px; font-size: 1.2rem; align-items: center; }
+        .nav-icons i { cursor: pointer; transition: var(--transition); position: relative; }
+        .nav-icons i:hover { color: var(--primary); }
+        .badge { position: absolute; top: -8px; right: -10px; background: var(--primary); color: var(--white); font-size: 0.7rem; padding: 2px 6px; border-radius: 50px; font-weight: bold; }
+
+        /* Search Bar */
+        .search-bar { display: flex; align-items: center; background: var(--bg-color); border-radius: 50px; padding: 5px 15px; border: 1px solid #ddd; }
+        .search-bar input { border: none; background: transparent; outline: none; padding: 5px; font-family: 'Quicksand'; width: 150px; }
+
+        /* === PAGE VIEWS === */
+        .page { display: none; padding: 40px 0; min-height: 70vh; }
+        .page.active { display: block; }
+
+        /* === HOME PAGE === */
+        .hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 0; background: linear-gradient(135deg, var(--white) 0%, var(--secondary) 100%); border-radius: var(--border-radius); margin-top: 20px; }
+        .hero-content { flex: 1; padding: 40px; }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero-content p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; }
+        .hero-image { flex: 1; text-align: center; }
+        .hero-image img { width: 80%; border-radius: var(--border-radius); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        /* Product Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+        .product-card { background: var(--white); border-radius: var(--border-radius); padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: var(--transition); position: relative; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .product-image { width: 100%; height: 220px; object-fit: contain; border-radius: 16px; margin-bottom: 15px; cursor: pointer; background: #fff;}
+        .product-title { font-size: 1.1rem; margin-bottom: 10px; cursor: pointer; min-height: 50px; }
+        .product-price { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .wishlist-btn { position: absolute; top: 25px; right: 25px; background: var(--white); width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: var(--text-light); z-index: 10; cursor: pointer;}
+        .wishlist-btn.active { color: var(--primary); }
+        .wishlist-btn:hover { transform: scale(1.1); }
+
+        /* Testimonials */
+        .testimonials { background-color: var(--accent); padding: 60px 20px; border-radius: var(--border-radius); margin-top: 60px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .review-card { background: var(--white); padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .stars { color: #FBBF24; margin-bottom: 10px; }
+
+        /* === SHOP PAGE === */
+        .filters { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 20px; border-radius: 50px; background: var(--white); border: 2px solid var(--secondary); font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+        /* === PRODUCT DETAILS PAGE === */
+        .details-container { display: flex; gap: 50px; background: var(--white); padding: 40px; border-radius: var(--border-radius); }
+        .details-image { flex: 1; border-radius: var(--border-radius); width: 100%; max-height: 500px; object-fit: contain; }
+        .details-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .details-info h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .details-price { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 20px; }
+        .details-desc { color: var(--text-light); line-height: 1.6; margin-bottom: 30px; font-size: 1.1rem; }
+        .reviews-section { margin-top: 40px; border-top: 2px dashed var(--secondary); padding-top: 20px;}
+
+        /* === CART & CHECKOUT PAGE === */
+        .cart-grid, .checkout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        .cart-items { background: var(--white); padding: 30px; border-radius: var(--border-radius); }
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .cart-item img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; }
+        .cart-item-info { flex: 1; margin-left: 20px; }
+        .cart-summary { background: var(--secondary); padding: 30px; border-radius: var(--border-radius); height: fit-content; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.1rem; }
+        .summary-total { font-weight: 700; font-size: 1.5rem; border-top: 2px dashed #ccc; padding-top: 15px; margin-top: 15px; }
+
+        /* Forms */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 12px; font-family: 'Quicksand'; outline: none; }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(244,114,182,0.2); }
+        .checkout-form { background: var(--white); padding: 30px; border-radius: var(--border-radius); }
+
+        /* === ABOUT & CONTACT === */
+        .text-center-box { background: var(--white); padding: 50px; border-radius: var(--border-radius); text-align: center; max-width: 800px; margin: 0 auto; }
+        .contact-form { max-width: 600px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: var(--border-radius); }
+
+        /* === MODAL (Login/Signup) === */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition); }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .auth-modal { background: var(--white); padding: 40px; border-radius: var(--border-radius); width: 400px; position: relative; transform: translateY(-20px); transition: var(--transition); }
+        .modal-overlay.active .auth-modal { transform: translateY(0); }
+        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-light); }
+        .auth-tabs { display: flex; margin-bottom: 30px; border-bottom: 2px solid #eee; }
+        .auth-tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; font-weight: 700; color: var(--text-light); }
+        .auth-tab.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+        /* === FOOTER === */
+        footer { background: var(--white); padding: 60px 0 20px; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        .footer-col h3 { margin-bottom: 20px; color: var(--primary); }
+        .footer-col ul li { margin-bottom: 10px; color: var(--text-light); cursor: pointer; }
+        .footer-col ul li:hover { color: var(--primary); }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; }
+        .social-links i { font-size: 1.5rem; color: var(--text-light); cursor: pointer; transition: 0.3s; }
+        .social-links i:hover { color: var(--primary); transform: translateY(-3px); }
+        .newsletter { display: flex; gap: 10px; margin-top: 15px; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #eee; color: var(--text-light); font-size: 0.9rem; }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; }
+            .cart-grid, .checkout-grid, .details-container { grid-template-columns: 1fr; }
+            .testimonial-grid, .footer-grid { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 600px) {
+            .testimonial-grid, .footer-grid { grid-template-columns: 1fr; }
+            .search-bar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BANNER -->
+    <div class="top-banner">
+        <i class="fas fa-paw"></i> Free Shipping on all orders above ₹499! <i class="fas fa-paw"></i>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo" onclick="navigateTo('home')">
+                <i class="fas fa-cat"></i> Pawdi
+            </div>
+            
+            <ul class="nav-links">
+                <li><a onclick="navigateTo('home')">Home</a></li>
+                <li><a onclick="navigateTo('shop')">Shop</a></li>
+                <li><a onclick="navigateTo('about')">About Us</a></li>
+                <li><a onclick="navigateTo('contact')">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search pets..." onkeyup="handleSearch(event)">
+                </div>
+                <i class="far fa-heart" onclick="navigateTo('shop')"><span class="badge" id="wishlist-count">0</span></i>
+                <i class="fas fa-shopping-cart" onclick="navigateTo('cart')"><span class="badge" id="cart-count">0</span></i>
+                <i class="far fa-user" onclick="toggleModal('auth-modal')"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 1. HOME VIEW -->
+        <section id="home" class="page active fade-in">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Spoil Your Furry Friends Today! 🐾</h1>
+                    <p>Premium food, engaging toys, and cozy accessories designed for the happiness of your dogs and cats.</p>
+                    <button class="btn btn-primary" onclick="navigateTo('shop')">Shop Now <i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Happy Dogs">
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 60px;">Featured Paw-ducts</h2>
+            <div class="product-grid" id="featured-products">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="testimonials">
+                <h2 class="section-title" style="margin-bottom: 30px;">Happy Pet Parents</h2>
+                <div class="testimonial-grid">
+                    <div class="review-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p>"Pawdi's plush beds completely changed my cat's sleeping routine. Best pet store right now."</p>
+                        <h4 style="margin-top: 15px;">- Sarah & Luna 🐱</h4>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <p>"The squeaky toy collection is extremely durable. Max loves it and hasn't destroyed it yet!"</p>
+                        <h4 style="margin-top: 15px;">- John & Max 🐶</h4>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p>"Lightning fast shipping and cute packaging. The combo offers saved me so much money."</p>
+                        <h4 style="margin-top: 15px;">- Priya & Bella 🐕</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SHOP VIEW -->
+        <section id="shop" class="page">
+            <h2 class="section-title">All Products</h2>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+                <button class="filter-btn" onclick="filterProducts('dog')">Dogs</button>
+                <button class="filter-btn" onclick="filterProducts('cat')">Cats</button>
+                <button class="filter-btn" onclick="filterProducts('food')">Food & Treats</button>
+                <button class="filter-btn" onclick="filterProducts('toy')">Toys</button>
+                <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
+            </div>
+            <div class="product-grid" id="shop-products">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- 3. PRODUCT DETAILS VIEW -->
+        <section id="product-details" class="page">
+            <div class="details-container">
+                <img src="" alt="Product" id="detail-img" class="details-image">
+                <div class="details-info">
+                    <h2 id="detail-name">Product Name</h2>
+                    <div class="stars" style="margin-bottom: 15px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 
+                        <span style="color:var(--text-light); font-size:0.9rem;">(24 Reviews)</span>
+                    </div>
+                    <div class="details-price" id="detail-price">₹0</div>
+                    <p class="details-desc">A premium product designed keeping your pet's health and happiness in mind. Made with high-quality, pet-safe materials.</p>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <button class="btn btn-primary" id="detail-add-btn">Add to Cart <i class="fas fa-cart-plus"></i></button>
+                        <button class="btn btn-outline" id="detail-wish-btn"><i class="far fa-heart"></i></button>
+                    </div>
+
+                    <div class="reviews-section">
+                        <h3>Customer Reviews</h3>
+                        <p style="color:var(--text-light); margin-top:10px;"><i class="fas fa-user-circle"></i> <b>Aman</b>: "My pet absolutely loves this! 10/10."</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-outline" style="margin-top: 30px;" onclick="navigateTo('shop')"><i class="fas fa-arrow-left"></i> Back to Shop</button>
+        </section>
+
+        <!-- 4. CART VIEW -->
+        <section id="cart" class="page">
+            <h2 class="section-title">Your Shopping Cart <i class="fas fa-shopping-basket"></i></h2>
+            <div class="cart-grid">
+                <div class="cart-items" id="cart-items-container">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 20px;">Order Summary</h3>
+                    <div class="summary-row"><span>Subtotal</span> <span id="cart-subtotal">₹0</span></div>
+                    <div class="summary-row"><span>Shipping</span> <span id="cart-shipping">₹0</span></div>
+                    <div class="summary-total summary-row"><span>Total</span> <span id="cart-total">₹0</span></div>
+                    <p style="font-size: 0.8rem; color: var(--primary); text-align: center; margin-bottom: 15px;" id="shipping-msg"></p>
+                    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="navigateTo('checkout')">Proceed to Checkout</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CHECKOUT VIEW -->
+        <section id="checkout" class="page">
+            <h2 class="section-title">Checkout</h2>
+            <div class="checkout-grid">
+                
+                <div class="checkout-form">
+                    <h3 style="margin-bottom: 20px;">Shipping Details</h3>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="form-group" style="flex: 1;"><label>First Name</label><input type="text" id="chk-fname" class="form-control" placeholder="John"></div>
+                        <div class="form-group" style="flex: 1;"><label>Last Name</label><input type="text" id="chk-lname" class="form-control" placeholder="Doe"></div>
+                    </div>
+                    <div class="form-group"><label>Email</label><input type="email" id="chk-email" class="form-control" placeholder="john@example.com"></div>
+                    <div class="form-group"><label>Address</label><input type="text" id="chk-address" class="form-control" placeholder="123 Pet Street, Apartment 4"></div>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="form-group" style="flex: 1;"><label>City</label><input type="text" id="chk-city" class="form-control" placeholder="Mumbai"></div>
+                        <div class="form-group" style="flex: 1;"><label>Zip Code</label><input type="text" id="chk-zip" class="form-control" placeholder="400001"></div>
+                    </div>
+                    
+                    <h3 style="margin-bottom: 20px; margin-top: 30px;">Payment Method</h3>
+                    <div class="form-group"><label>Card Number</label><input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX"></div>
+                    <div style="display: flex; gap: 20px;">
+                        <div class="form-group" style="flex: 1;"><label>Expiry</label><input type="text" class="form-control" placeholder="MM/YY"></div>
+                        <div class="form-group" style="flex: 1;"><label>CVV</label><input type="password" class="form-control" placeholder="***"></div>
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 20px;">Final Review</h3>
+                    <div class="summary-total summary-row"><span>Amount to Pay</span> <span id="checkout-total">₹0</span></div>
+                    
+                    <button class="btn btn-primary" id="place-order-btn" style="width: 100%; justify-content: center; margin-top: 20px;" onclick="placeOrder()">
+                        Place Order <i class="fas fa-check-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. ABOUT VIEW -->
+        <section id="about" class="page">
+            <div class="text-center-box">
+                <i class="fas fa-heart" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                <h2>About Pawdi</h2>
+                <p style="margin-top: 20px; color: var(--text-light); line-height: 1.8; font-size: 1.1rem;">
+                    Founded in 2024, Pawdi is born out of a simple idea: our pets deserve the absolute best. We curate premium, fun, and safe products for dogs and cats. Every product in our catalog is tested and approved by our own furry co-founders. We believe in soft colors, happy tails, and creating a community of pet lovers who want to spoil their companions!
+                </p>
+            </div>
+        </section>
+
+        <!-- 7. CONTACT VIEW -->
+        <section id="contact" class="page">
+            <div class="contact-form">
+                <h2 style="text-align: center; margin-bottom: 30px;">Say Hello! <i class="fas fa-paw" style="color:var(--primary)"></i></h2>
+                <div class="form-group"><label>Your Name</label><input type="text" class="form-control" placeholder="Enter your name"></div>
+                <div class="form-group"><label>Email</label><input type="email" class="form-control" placeholder="woof@example.com"></div>
+                <div class="form-group"><label>Message</label><textarea class="form-control" rows="5" placeholder="How can we help you?"></textarea></div>
+                <button class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 style="font-size: 1.8rem; display: flex; align-items: center; gap: 8px;"><i class="fas fa-cat"></i> Pawdi</h3>
+                    <p style="color: var(--text-light); line-height: 1.6;">Delivering happiness to your pets' doorstep with premium quality products.</p>
+                    <div class="social-links">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li onclick="navigateTo('home')">Home</li>
+                        <li onclick="navigateTo('shop')">Shop</li>
+                        <li onclick="navigateTo('about')">About Us</li>
+                        <li onclick="navigateTo('contact')">Contact</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Policies</h3>
+                    <ul>
+                        <li>Privacy Policy</li>
+                        <li>Terms of Service</li>
+                        <li>Shipping & Returns</li>
+                        <li>FAQ</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Join the Pack</h3>
+                    <p style="color: var(--text-light); margin-bottom: 10px;">Subscribe to our newsletter for pawsome updates & offers.</p>
+                    <div class="newsletter">
+                        <input type="email" class="form-control" placeholder="Email address" style="flex:1;">
+                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Pawdi. Made with <i class="fas fa-heart" style="color: var(--primary);"></i> for pets.
+            </div>
+        </div>
+    </footer>
+
+    <!-- AUTHENTICATION MODAL -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="auth-modal">
+            <span class="close-modal" onclick="toggleModal('auth-modal')">&times;</span>
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')" id="tab-login">Login</div>
+                <div class="auth-tab" onclick="switchAuthTab('signup')" id="tab-signup">Sign Up</div>
+            </div>
+            
+            <div id="form-login">
+                <div class="form-group"><label>Email</label><input type="email" class="form-control"></div>
+                <div class="form-group"><label>Password</label><input type="password" class="form-control"></div>
+                <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="alert('Logged in successfully!'); toggleModal('auth-modal')">Login</button>
+            </div>
+
+            <div id="form-signup" class="hidden">
+                <div class="form-group"><label>Full Name</label><input type="text" class="form-control"></div>
+                <div class="form-group"><label>Email</label><input type="email" class="form-control"></div>
+                <div class="form-group"><label>Password</label><input type="password" class="form-control"></div>
+                <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="alert('Account created!'); toggleModal('auth-modal')">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- PRODUCTS ---
+        const products =[
+            { id: 1, name: "Premium Black Harness & Leash", price: 899, category: "accessories", animal: "dog", img: "img-1.jpg" },
+            { id: 2, name: "Crunchy Star Biscuits (Golden Pack)", price: 350, category: "food", animal: "dog", img: "img-2.jpg" },
+            { id: 3, name: "Crunchy Star Biscuits (Aussie Pack)", price: 350, category: "food", animal: "dog", img: "img-3.jpg" },
+            { id: 4, name: "Multicolored Dental Chew Sticks", price: 299, category: "food", animal: "dog", img: "img-4.jpg" },
+            { id: 5, name: "Glowing Blue Interactive Ball", price: 599, category: "toy", animal: "dog", img: "img-5.jpg" },
+            { id: 6, name: "Treat Combo 500g + 500g", price: 650, category: "food", animal: "dog", img: "img-6.jpg" },
+            { id: 7, name: "Blue Deshedding Glove", price: 249, category: "accessories", animal: "all", img: "img-7.jpg" },
+            { id: 8, name: "Floni Anti-Tick Wash + Free Brush", price: 499, category: "accessories", animal: "all", img: "img-8.jpg" },
+            { id: 9, name: "Spiky Red Rubber Ball", price: 199, category: "toy", animal: "dog", img: "img-9.jpg" },
+            { id: 10, name: "Ultra Absorbent Puppy Pads", price: 799, category: "accessories", animal: "dog", img: "img-10.jpg" },
+            { id: 11, name: "Pink Silicone Bath Brush", price: 150, category: "accessories", animal: "all", img: "img-11.jpg" },
+            { id: 12, name: "Cozy Yellow Cat Bed", price: 1299, category: "accessories", animal: "cat", img: "img-12.jpg" },
+            { id: 13, name: "2-in-1 Feeder & Water Bowl", price: 850, category: "accessories", animal: "dog", img: "img-13.jpg" },
+            { id: 14, name: "Automatic Food Dispenser", price: 2499, category: "accessories", animal: "all", img: "img-14.jpg" },
+            { id: 15, name: "Pawdi Dog Chew Bones (5 pcs)", price: 399, category: "food", animal: "dog", img: "img-15.jpg" },
+            { id: 16, name: "Rope Toys Set with Carrot", price: 450, category: "toy", animal: "dog", img: "img-16.jpg" },
+            { id: 17, name: "Assorted Treat Pack & Bones", price: 899, category: "food", animal: "dog", img: "img-17.jpg" },
+            { id: 18, name: "Breedo Anti-Itch Combo + Glove", price: 599, category: "accessories", animal: "dog", img: "img-18.jpg" },
+            { id: 19, name: "Steam Pet Hair Brush", price: 999, category: "accessories", animal: "cat", img: "img-19.jpg" },
+            { id: 20, name: "Robo Dance Smart Toy", price: 1999, category: "toy", animal: "dog", img: "img-20.jpg" },
+            { id: 21, name: "Treat Combo 500g + 500g (Twin Pack)", price: 650, category: "food", animal: "dog", img: "img-21.jpg" },
+            { id: 22, name: "Glowing Red Interactive Ball", price: 599, category: "toy", animal: "dog", img: "img-22.jpg" },
+            { id: 23, name: "Blue Deshedding Glove (Large)", price: 249, category: "accessories", animal: "all", img: "img-23.jpg" },
+            { id: 24, name: "Floni Body Wash (Economy)", price: 499, category: "accessories", animal: "all", img: "img-24.jpg" },
+            { id: 25, name: "Spiky Red Rubber Ball (Durable)", price: 199, category: "toy", animal: "dog", img: "img-25.jpg" },
+            { id: 26, name: "Puppy Pads (Jumbo Pack)", price: 799, category: "accessories", animal: "dog", img: "img-26.jpg" },
+            { id: 27, name: "Pink Silicone Bath Brush (Soft)", price: 150, category: "accessories", animal: "all", img: "img-27.jpg" },
+            { id: 28, name: "Cozy Yellow Cat Bed (Plush)", price: 1299, category: "accessories", animal: "cat", img: "img-28.jpg" },
+            { id: 29, name: "2-in-1 Feeder & Water Bowl (Large)", price: 850, category: "accessories", animal: "dog", img: "img-29.jpg" },
+            { id: 30, name: "Automatic Food Dispenser (Smart)", price: 2499, category: "accessories", animal: "all", img: "img-30.jpg" },
+            { id: 31, name: "Pawdi Dog Chew Bones (Multipack)", price: 399, category: "food", animal: "dog", img: "img-31.jpg" },
+            { id: 32, name: "Rope Toys Set (Agility)", price: 450, category: "toy", animal: "dog", img: "img-32.jpg" },
+            { id: 33, name: "Assorted Treat Pack (Premium)", price: 899, category: "food", animal: "dog", img: "img-33.jpg" },
+            { id: 34, name: "Breedo Anti-Itch Combo (Medicated)", price: 599, category: "accessories", animal: "dog", img: "img-34.jpg" },
+            { id: 35, name: "Steam Pet Hair Brush (Pro)", price: 999, category: "accessories", animal: "cat", img: "img-35.jpg" },
+            { id: 36, name: "Sonavi Pet Care 3-in-1 Combo", price: 750, category: "accessories", animal: "dog", img: "img-36.jpg" },
+            { id: 37, name: "Natural Dog Chew Bone", price: 199, category: "food", animal: "dog", img: "img-37.jpg" },
+            { id: 38, name: "Carrot Rope Chew Toy", price: 250, category: "toy", animal: "dog", img: "img-38.jpg" },
+            { id: 39, name: "Green Floral Plush Dog Bed", price: 1599, category: "accessories", animal: "dog", img: "img-39.jpg" },
+            { id: 40, name: "Robo Dance Smart Toy (Advanced)", price: 1999, category: "toy", animal: "dog", img: "img-40.jpg" }
+        ];
+
+        let cart = [];
+        let wishlist =[];
+
+        // --- ROUTING / NAVIGATION ---
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+                page.classList.remove('fade-in');
+            });
+            const target = document.getElementById(pageId);
+            target.classList.add('active');
+            setTimeout(() => target.classList.add('fade-in'), 10);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if(pageId === 'shop') renderProducts(products, 'shop-products');
+            if(pageId === 'cart') updateCartUI();
+        }
+
+        // --- RENDERING PRODUCTS ---
+        function renderProducts(items, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            if(items.length === 0) {
+                container.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1 / -1;">No products found.</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const isWished = wishlist.includes(item.id) ? 'active fas' : 'far';
+                const card = `
+                    <div class="product-card">
+                        <i class="${isWished} fa-heart wishlist-btn" onclick="toggleWishlist(${item.id}, event)"></i>
+                        <img src="${item.img}" alt="${item.name}" class="product-image" onerror="this.src='https://via.placeholder.com/300x300?text=Image+Missing'" onclick="viewProduct(${item.id})">
+                        <h3 class="product-title" onclick="viewProduct(${item.id})">${item.name}</h3>
+                        <p class="product-price">₹${item.price}</p>
+                        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="addToCart(${item.id})">
+                            Add to Cart <i class="fas fa-cart-plus"></i>
+                        </button>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // --- FILTER & SEARCH ---
+        function filterProducts(filterValue) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let filtered = products;
+            if(filterValue !== 'all') {
+                filtered = products.filter(p => p.category === filterValue || p.animal === filterValue || p.animal === 'all');
+            }
+            renderProducts(filtered, 'shop-products');
+        }
+
+        function handleSearch(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+            navigateTo('shop');
+            renderProducts(filtered, 'shop-products');
+        }
+
+        // --- PRODUCT DETAILS ---
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            document.getElementById('detail-img').src = product.img;
+            document.getElementById('detail-img').onerror = function() { this.src='https://via.placeholder.com/600x600?text=Image+Missing'; }; 
+            
+            document.getElementById('detail-name').innerText = product.name;
+            document.getElementById('detail-price').innerText = `₹${product.price}`;
+            
+            document.getElementById('detail-add-btn').onclick = () => addToCart(id);
+            
+            const wishBtn = document.getElementById('detail-wish-btn');
+            wishBtn.innerHTML = wishlist.includes(id) ? '<i class="fas fa-heart" style="color:var(--primary)"></i>' : '<i class="far fa-heart"></i>';
+            wishBtn.onclick = () => {
+                toggleWishlist(id, {stopPropagation: ()=>{}});
+                viewProduct(id);
+            };
+
+            navigateTo('product-details');
+        }
+
+        // --- CART LOGIC ---
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+            
+            if(existingItem) existingItem.quantity += 1;
+            else cart.push({ ...product, quantity: 1 });
+            
+            updateCartCount();
+            alert(`${product.name} added to cart! 🐾`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartCount();
+            updateCartUI();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = count;
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+            
+            if(cart.length === 0) {
+                container.innerHTML = '<p>Your cart is empty. Let\'s find some treats!</p>';
+                document.getElementById('cart-subtotal').innerText = '₹0';
+                document.getElementById('cart-shipping').innerText = '₹0';
+                document.getElementById('cart-total').innerText = '₹0';
+                document.getElementById('checkout-total').innerText = '₹0';
+                document.getElementById('shipping-msg').innerText = '';
+                return;
+            }
+
+            let subtotal = 0;
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                container.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80?text=NA'">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p style="color:var(--primary); font-weight:bold;">₹${item.price} x ${item.quantity}</p>
+                        </div>
+                        <button class="btn btn-outline" style="padding: 8px; border-radius: 8px;" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            let shipping = subtotal > 499 ? 0 : 50;
+            let total = subtotal + shipping;
+
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
+            document.getElementById('cart-shipping').innerText = shipping === 0 ? 'Free' : `₹${shipping}`;
+            document.getElementById('cart-total').innerText = `₹${total}`;
+            document.getElementById('checkout-total').innerText = `₹${total}`;
+            
+            if (shipping === 0) {
+                document.getElementById('shipping-msg').innerText = "Yay! You unlocked Free Shipping! 🎉";
+            } else {
+                document.getElementById('shipping-msg').innerText = `Add ₹${499 - subtotal} more to get Free Shipping!`;
+            }
+        }
+
+        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
+        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
+        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
+        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
+        function placeOrder() {
+            if(cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            // 1. Gather all data from the form
+            const fName = document.getElementById('chk-fname').value.trim();
+            const lName = document.getElementById('chk-lname').value.trim();
+            const email = document.getElementById('chk-email').value.trim();
+            const address = document.getElementById('chk-address').value.trim();
+            const city = document.getElementById('chk-city').value.trim();
+            const zip = document.getElementById('chk-zip').value.trim();
+
+            if(!fName || !lName || !email || !address || !city || !zip) {
+                alert("Please fill out all Shipping Details before placing the order.");
+                return;
+            }
+
+            // 2. Format Products string and Calculate Total
+            const productString = cart.map(item => `${item.name} (x${item.quantity})`).join(", ");
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = subtotal > 499 ? 0 : 50;
+            const totalAmount = subtotal + shipping;
+
+            // 3. Create a clean JSON data package
+            const payload = {
+                FirstName: fName,
+                LastName: lName,
+                Email: email,
+                Address: address,
+                City: city,
+                ZipCode: zip,
+                Products: productString,
+                TotalAmount: `₹${totalAmount}`
+            };
+
+            // 4. Update UI
+            const btn = document.getElementById('place-order-btn');
+            btn.innerHTML = "Processing... <i class='fas fa-spinner fa-spin'></i>";
+            btn.disabled = true;
+
+            // 5. Send POST Request as plain text so the browser allows it
+            const scriptURL = "https://script.google.com/macros/s/AKfycby0HqxiymNb5nk38o0zw3fWf1YHCSbKFBNUFmMWZv2zQARbXTtzKkY_jDmbeOT0ZU5HOw/exec";
+            
+            fetch(scriptURL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                alert("Order Placed Successfully! Thank you for shopping at Pawdi 🐾");
+                
+                // Clear Cart & Inputs
+                cart =[];
+                updateCartCount();
+                updateCartUI();
+                
+                document.getElementById('chk-fname').value = "";
+                document.getElementById('chk-lname').value = "";
+                document.getElementById('chk-email').value = "";
+                document.getElementById('chk-address').value = "";
+                document.getElementById('chk-city').value = "";
+                document.getElementById('chk-zip').value = "";
+
+                navigateTo('home');
+            })
+            .catch(error => {
+                console.error('Error!', error);
+                alert("Something went wrong. Please try again.");
+            })
+            .finally(() => {
+                btn.innerHTML = "Place Order <i class='fas fa-check-circle'></i>";
+                btn.disabled = false;
+            });
+        }
+        // --- WISHLIST LOGIC ---
+        function toggleWishlist(id, event) {
+            event.stopPropagation();
+            const index = wishlist.indexOf(id);
+            if(index === -1) wishlist.push(id);
+            else wishlist.splice(index, 1);
+            
+            document.getElementById('wishlist-count').innerText = wishlist.length;
+            
+            if(document.getElementById('shop').classList.contains('active')) {
+                const activeFilter = document.querySelector('.filter-btn.active').innerText.toLowerCase();
+                let filterMap = { 'all': 'all', 'dogs': 'dog', 'cats': 'cat', 'food & treats': 'food', 'toys': 'toy', 'accessories': 'accessories' };
+                filterProducts(filterMap[activeFilter]);
+            } else {
+                renderProducts(products.slice(0, 12), 'featured-products');
+            }
+        }
+
+        // --- MODAL LOGIC ---
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.toggle('active');
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+            
+            document.getElementById('form-login').classList.add('hidden');
+            document.getElementById('form-signup').classList.add('hidden');
+            
+            document.getElementById(`form-${tab}`).classList.remove('hidden');
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = () => {
+            renderProducts(products.slice(0, 12), 'featured-products');
+        };
+    </script>
+</body>
+</html>
