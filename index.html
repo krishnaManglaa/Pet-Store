@@ -38,7 +38,7 @@
         .btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
         .btn-outline:hover { background-color: var(--primary); color: var(--white); }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-dark); }
-        .fade-in { animation: fadeIn 0.5s ease forwards; }
+        .fade-in { animation: fadeIn 0.4s ease forwards; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -46,7 +46,8 @@
         .top-banner { background-color: var(--secondary); color: var(--text-dark); text-align: center; padding: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; }
         header { background-color: var(--white); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; position: relative; }
-        .logo { font-size: 2rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .logo { cursor: pointer; display: flex; align-items: center; }
+        .logo img { height: 50px; width: auto; border-radius: 12px; } /* Adjust logo size */
         
         .nav-links { display: flex; gap: 30px; font-weight: 600; }
         .nav-links li:hover { color: var(--primary); transition: var(--transition); }
@@ -85,12 +86,6 @@
         .wishlist-btn:hover { transform: scale(1.1); }
         .product-actions { display: flex; flex-direction: column; gap: 10px; }
 
-        /* Testimonials */
-        .testimonials { background-color: var(--accent); padding: 60px 20px; border-radius: var(--border-radius); margin-top: 60px; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .review-card { background: var(--white); padding: 25px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .stars { color: #FBBF24; margin-bottom: 10px; }
-
         /* === SHOP PAGE === */
         .filters { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
         .filter-btn { padding: 8px 18px; border-radius: 50px; background: var(--white); border: 2px solid var(--secondary); font-weight: 600; cursor: pointer; transition: var(--transition); }
@@ -103,14 +98,20 @@
         .details-info h2 { font-size: 2.2rem; margin-bottom: 10px; }
         .details-price { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 20px; }
         .details-desc { color: var(--text-light); line-height: 1.6; margin-bottom: 30px; font-size: 1.1rem; }
-        .reviews-section { margin-top: 40px; border-top: 2px dashed var(--secondary); padding-top: 20px;}
 
         /* === CART & CHECKOUT PAGE === */
         .cart-grid, .checkout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-        .cart-items { background: var(--white); padding: 30px; border-radius: var(--border-radius); overflow-x: auto;}
-        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; min-width: 400px;}
+        .cart-items { background: var(--white); padding: 30px; border-radius: var(--border-radius); overflow-x: hidden;}
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; flex-wrap: wrap; gap: 15px;}
         .cart-item img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; }
-        .cart-item-info { flex: 1; margin-left: 20px; }
+        .cart-item-info { flex: 1; min-width: 150px; }
+        
+        /* Cart Quantity Controls (+ / -) */
+        .cart-actions-wrapper { display: flex; align-items: center; gap: 15px; }
+        .cart-qty-controls { display: flex; align-items: center; gap: 12px; background: var(--bg-color); padding: 5px 12px; border-radius: 50px; border: 1px solid #eee; }
+        .btn-qty { background: var(--white); border: none; width: 26px; height: 26px; border-radius: 50%; font-weight: bold; font-size: 1.1rem; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;}
+        .btn-qty:hover { background: var(--primary); color: var(--white); }
+
         .cart-summary { background: var(--secondary); padding: 30px; border-radius: var(--border-radius); height: fit-content; }
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.1rem; }
         .summary-total { font-weight: 700; font-size: 1.5rem; border-top: 2px dashed #ccc; padding-top: 15px; margin-top: 15px; }
@@ -161,7 +162,6 @@
             .hero { flex-direction: column; text-align: center; padding: 30px 0; }
             .hero-content h1 { font-size: 2.5rem; }
             .cart-grid, .checkout-grid { grid-template-columns: 1fr; }
-            .testimonial-grid { grid-template-columns: 1fr; }
             
             /* Mobile Navigation */
             .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: -100%; width: 100%; background: var(--white); box-shadow: 0 10px 10px rgba(0,0,0,0.05); transition: 0.3s; padding: 20px 0; z-index: 99; text-align: center;}
@@ -179,6 +179,7 @@
             .wishlist-btn { width: 30px; height: 30px; top: 10px; right: 10px; }
             .section-title { font-size: 2rem; }
             .details-container { padding: 20px; }
+            .cart-actions-wrapper { width: 100%; justify-content: space-between; margin-top: 10px;}
         }
     </style>
 </head>
@@ -195,7 +196,8 @@
             <div style="display: flex; align-items: center;">
                 <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
                 <div class="logo" onclick="navigateTo('home')">
-                    <i class="fas fa-cat"></i> Pawdi
+                    <!-- UPLOADED LOGO APPLIED HERE -->
+                    <img src="logo.png" alt="Pawdi Logo">
                 </div>
             </div>
             
@@ -242,39 +244,20 @@
             <div class="product-grid" id="featured-products">
                 <!-- Populated by JS -->
             </div>
-
-            <div class="testimonials">
-                <h2 class="section-title" style="margin-bottom: 30px;">Happy Pet Parents</h2>
-                <div class="testimonial-grid">
-                    <div class="review-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p>"Pawdi's plush beds completely changed my cat's sleeping routine. Best pet store right now."</p>
-                        <h4 style="margin-top: 15px;">- Sarah & Luna 🐱</h4>
-                    </div>
-                    <div class="review-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                        <p>"The squeaky toy collection is extremely durable. Max loves it and hasn't destroyed it yet!"</p>
-                        <h4 style="margin-top: 15px;">- John & Max 🐶</h4>
-                    </div>
-                    <div class="review-card">
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p>"Lightning fast shipping and cute packaging. The combo offers saved me so much money."</p>
-                        <h4 style="margin-top: 15px;">- Priya & Bella 🐕</h4>
-                    </div>
-                </div>
-            </div>
+            
+            <!-- FAKE TESTIMONIALS REMOVED FROM HERE -->
         </section>
 
         <!-- 2. SHOP VIEW -->
         <section id="shop" class="page">
             <h2 class="section-title">All Products</h2>
             <div class="filters">
-                <button class="filter-btn active" onclick="filterProducts('all')">All</button>
-                <button class="filter-btn" onclick="filterProducts('dog')">Dogs</button>
-                <button class="filter-btn" onclick="filterProducts('cat')">Cats</button>
-                <button class="filter-btn" onclick="filterProducts('food')">Food & Treats</button>
-                <button class="filter-btn" onclick="filterProducts('toy')">Toys</button>
-                <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
+                <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">All</button>
+                <button class="filter-btn" data-filter="dog" onclick="filterProducts('dog')">Dogs</button>
+                <button class="filter-btn" data-filter="cat" onclick="filterProducts('cat')">Cats</button>
+                <button class="filter-btn" data-filter="food" onclick="filterProducts('food')">Food & Treats</button>
+                <button class="filter-btn" data-filter="toy" onclick="filterProducts('toy')">Toys</button>
+                <button class="filter-btn" data-filter="accessories" onclick="filterProducts('accessories')">Accessories</button>
             </div>
             <div class="product-grid" id="shop-products">
                 <!-- Populated by JS -->
@@ -287,9 +270,8 @@
                 <img src="" alt="Product" id="detail-img" class="details-image">
                 <div class="details-info">
                     <h2 id="detail-name">Product Name</h2>
-                    <div class="stars" style="margin-bottom: 15px;">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 
-                        <span style="color:var(--text-light); font-size:0.9rem;">(24 Reviews)</span>
+                    <div class="stars" style="margin-bottom: 15px; color: transparent;">
+                        <!-- Stars Removed -->
                     </div>
                     <div class="details-price" id="detail-price">₹0</div>
                     <p class="details-desc">A premium product designed keeping your pet's health and happiness in mind. Made with high-quality, pet-safe materials.</p>
@@ -300,10 +282,7 @@
                         <button class="btn btn-outline" id="detail-wish-btn" style="width: auto;"><i class="far fa-heart"></i></button>
                     </div>
 
-                    <div class="reviews-section">
-                        <h3>Customer Reviews</h3>
-                        <p style="color:var(--text-light); margin-top:10px;"><i class="fas fa-user-circle"></i> <b>Aman</b>: "My pet absolutely loves this! 10/10."</p>
-                    </div>
+                    <!-- FAKE REVIEWS REMOVED FROM HERE -->
                 </div>
             </div>
             <button class="btn btn-outline" style="margin-top: 30px; width: auto;" onclick="navigateTo('shop')"><i class="fas fa-arrow-left"></i> Back to Shop</button>
@@ -363,7 +342,7 @@
             </div>
         </section>
 
-        <!-- 6. ORDER SUCCESS PAGE (NEW) -->
+        <!-- 6. ORDER SUCCESS PAGE -->
         <section id="order-success" class="page">
             <div class="text-center-box">
                 <i class="fas fa-check-circle success-icon"></i>
@@ -381,7 +360,8 @@
                 <i class="fas fa-heart" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
                 <h2>About Pawdi</h2>
                 <p style="margin-top: 20px; color: var(--text-light); line-height: 1.8; font-size: 1.1rem;">
-                    Founded in 2024, Pawdi is born out of a simple idea: our pets deserve the absolute best. We curate premium, fun, and safe products for dogs and cats. Every product in our catalog is tested and approved by our own furry co-founders. We believe in soft colors, happy tails, and creating a community of pet lovers who want to spoil their companions!
+                    <!-- DATE UPDATED TO 2026 -->
+                    Founded in 2026, Pawdi is born out of a simple idea: our pets deserve the absolute best. We curate premium, fun, and safe products for dogs and cats. Every product in our catalog is tested and approved by our own furry co-founders. We believe in soft colors, happy tails, and creating a community of pet lovers who want to spoil their companions!
                 </p>
             </div>
         </section>
@@ -403,7 +383,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3 style="font-size: 1.8rem; display: flex; align-items: center; gap: 8px;"><i class="fas fa-cat"></i> Pawdi</h3>
+                    <!-- UPLOADED LOGO APPLIED TO FOOTER -->
+                    <h3 style="display: flex; align-items: center; margin-bottom: 15px;"><img src="logo.png" alt="Pawdi Logo" style="height: 40px; border-radius: 8px;"></h3>
                     <p style="color: var(--text-light); line-height: 1.6;">Delivering happiness to your pets' doorstep with premium quality products.</p>
                     <div class="social-links">
                         <i class="fab fa-instagram"></i>
@@ -516,21 +497,48 @@
 
         let cart =[];
         let wishlist =[];
+        let currentFilter = 'all';
 
-        // --- NAVIGATION & MOBILE MENU ---
-        function navigateTo(pageId) {
+        // --- BROWSER HISTORY (BACK BUTTON) ROUTING ---
+        function navigateTo(pageId, pushToHistory = true) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
                 page.classList.remove('fade-in');
             });
             const target = document.getElementById(pageId);
+            if(!target) return;
+            
             target.classList.add('active');
             setTimeout(() => target.classList.add('fade-in'), 10);
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            if(pageId === 'shop') renderProducts(products, 'shop-products');
-            if(pageId === 'cart' || pageId === 'checkout') updateCartUI(); // Ensures total is calculated
+            if(pageId === 'shop') filterProducts(currentFilter);
+            if(pageId === 'cart' || pageId === 'checkout') updateCartUI();
+
+            if (pushToHistory) {
+                history.pushState({ page: pageId }, "", `#${pageId}`);
+            }
         }
+
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.page) {
+                if (event.state.page === 'product-details' && event.state.productId) {
+                    viewProduct(event.state.productId, false);
+                } else {
+                    navigateTo(event.state.page, false);
+                }
+            } else {
+                const hash = window.location.hash.replace('#', '').split('?')[0];
+                const searchParams = new URLSearchParams(window.location.hash.split('?')[1]);
+                if (hash === 'product-details' && searchParams.get('id')) {
+                    viewProduct(parseInt(searchParams.get('id')), false);
+                } else if (hash && document.getElementById(hash)) {
+                    navigateTo(hash, false);
+                } else {
+                    navigateTo('home', false);
+                }
+            }
+        });
 
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -581,8 +589,15 @@
 
         // --- FILTER & SEARCH ---
         function filterProducts(filterValue) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            currentFilter = filterValue;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.dataset.filter === filterValue) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
 
             let filtered = products;
             if(filterValue !== 'all') {
@@ -599,7 +614,7 @@
         }
 
         // --- PRODUCT DETAILS ---
-        function viewProduct(id) {
+        function viewProduct(id, pushToHistory = true) {
             const product = products.find(p => p.id === id);
             document.getElementById('detail-img').src = product.img;
             document.getElementById('detail-img').onerror = function() { this.src='https://via.placeholder.com/600x600?text=Pawdi+Product'; }; 
@@ -614,10 +629,13 @@
             wishBtn.innerHTML = wishlist.includes(id) ? '<i class="fas fa-heart" style="color:var(--primary)"></i>' : '<i class="far fa-heart"></i>';
             wishBtn.onclick = () => {
                 toggleWishlist(id, {stopPropagation: ()=>{}});
-                viewProduct(id);
+                viewProduct(id, false);
             };
 
-            navigateTo('product-details');
+            if (pushToHistory) {
+                history.pushState({ page: 'product-details', productId: id }, "", `#product-details?id=${id}`);
+            }
+            navigateTo('product-details', false);
         }
 
         // --- CART LOGIC ---
@@ -636,8 +654,22 @@
         }
 
         function buyNow(id) {
-            addToCart(id, true); // add without showing toast
-            navigateTo('checkout'); // jump straight to checkout
+            addToCart(id, true);
+            navigateTo('checkout'); 
+        }
+        
+        function changeQuantity(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if(!item) return;
+
+            item.quantity += delta;
+
+            if(item.quantity <= 0) {
+                removeFromCart(id);
+            } else {
+                updateCartCount();
+                updateCartUI();
+            }
         }
 
         function removeFromCart(id) {
@@ -671,14 +703,25 @@
                 subtotal += item.price * item.quantity;
                 container.innerHTML += `
                     <div class="cart-item">
-                        <img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80?text=NA'">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <p style="color:var(--primary); font-weight:bold;">₹${item.price} x ${item.quantity}</p>
+                        <div style="display:flex; align-items:center; gap: 15px; flex: 1; min-width: 200px;">
+                            <img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80?text=NA'">
+                            <div class="cart-item-info">
+                                <h4>${item.name}</h4>
+                                <p style="color:var(--primary); font-weight:bold;">₹${item.price}</p>
+                            </div>
                         </div>
-                        <button class="btn btn-outline" style="padding: 8px; width: auto; border-radius: 8px;" onclick="removeFromCart(${item.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        
+                        <div class="cart-actions-wrapper">
+                            <div class="cart-qty-controls">
+                                <button class="btn-qty" onclick="changeQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="btn-qty" onclick="changeQuantity(${item.id}, 1)">+</button>
+                            </div>
+                            
+                            <button class="btn btn-outline" style="padding: 8px; border-radius: 8px;" onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
                     </div>
                 `;
             });
@@ -746,10 +789,8 @@
                 body: JSON.stringify(payload)
             })
             .then(() => {
-                // Success: Navigate to the beautiful Order Success animation page
                 navigateTo('order-success');
                 
-                // Clear Cart & Inputs
                 cart =[];
                 updateCartCount();
                 updateCartUI();
@@ -781,9 +822,7 @@
             document.getElementById('wishlist-count').innerText = wishlist.length;
             
             if(document.getElementById('shop').classList.contains('active')) {
-                const activeFilter = document.querySelector('.filter-btn.active').innerText.toLowerCase();
-                let filterMap = { 'all': 'all', 'dogs': 'dog', 'cats': 'cat', 'food & treats': 'food', 'toys': 'toy', 'accessories': 'accessories' };
-                filterProducts(filterMap[activeFilter]);
+                filterProducts(currentFilter);
             } else {
                 renderProducts(products.slice(0, 12), 'featured-products');
             }
@@ -808,6 +847,18 @@
         // --- INITIALIZATION ---
         window.onload = () => {
             renderProducts(products.slice(0, 12), 'featured-products');
+
+            const hash = window.location.hash.replace('#', '').split('?')[0];
+            const searchParams = new URLSearchParams(window.location.hash.split('?')[1]);
+            
+            if (hash === 'product-details' && searchParams.get('id')) {
+                viewProduct(parseInt(searchParams.get('id')), false);
+            } else if (hash && document.getElementById(hash)) {
+                navigateTo(hash, false);
+            } else {
+                history.replaceState({ page: 'home' }, "", "#home");
+                navigateTo('home', false);
+            }
         };
     </script>
 </body>
