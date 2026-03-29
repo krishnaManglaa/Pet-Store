@@ -31,10 +31,10 @@
         /* === UTILITY CLASSES === */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .hidden { display: none !important; }
-        .btn { padding: 12px 24px; border-radius: 50px; font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px; }
+        .btn { padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; display: inline-flex; justify-content: center; align-items: center; gap: 8px; width: 100%; }
         .btn-primary { background-color: var(--primary); color: var(--white); box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4); }
         .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
-        .btn-primary:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
+        .btn-primary:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; transform: none; }
         .btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
         .btn-outline:hover { background-color: var(--primary); color: var(--white); }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-dark); }
@@ -45,7 +45,7 @@
         /* === TOP BANNER & HEADER === */
         .top-banner { background-color: var(--secondary); color: var(--text-dark); text-align: center; padding: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; }
         header { background-color: var(--white); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; position: relative; }
         .logo { font-size: 2rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; cursor: pointer; }
         
         .nav-links { display: flex; gap: 30px; font-weight: 600; }
@@ -56,32 +56,34 @@
         .nav-icons i:hover { color: var(--primary); }
         .badge { position: absolute; top: -8px; right: -10px; background: var(--primary); color: var(--white); font-size: 0.7rem; padding: 2px 6px; border-radius: 50px; font-weight: bold; }
 
-        /* Search Bar */
         .search-bar { display: flex; align-items: center; background: var(--bg-color); border-radius: 50px; padding: 5px 15px; border: 1px solid #ddd; }
-        .search-bar input { border: none; background: transparent; outline: none; padding: 5px; font-family: 'Quicksand'; width: 150px; }
+        .search-bar input { border: none; background: transparent; outline: none; padding: 5px; font-family: 'Quicksand'; width: 120px; }
+        
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--primary); cursor: pointer; }
 
         /* === PAGE VIEWS === */
         .page { display: none; padding: 40px 0; min-height: 70vh; }
         .page.active { display: block; }
 
         /* === HOME PAGE === */
-        .hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 0; background: linear-gradient(135deg, var(--white) 0%, var(--secondary) 100%); border-radius: var(--border-radius); margin-top: 20px; }
+        .hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 0; background: linear-gradient(135deg, var(--white) 0%, var(--secondary) 100%); border-radius: var(--border-radius); margin-top: 20px; gap: 20px; }
         .hero-content { flex: 1; padding: 40px; }
         .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
         .hero-content p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; }
         .hero-image { flex: 1; text-align: center; }
-        .hero-image img { width: 80%; border-radius: var(--border-radius); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .hero-image img { width: 100%; max-width: 500px; border-radius: var(--border-radius); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
         /* Product Grid */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
         .product-card { background: var(--white); border-radius: var(--border-radius); padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: var(--transition); position: relative; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .product-image { width: 100%; height: 220px; object-fit: contain; border-radius: 16px; margin-bottom: 15px; cursor: pointer; background: #fff;}
-        .product-title { font-size: 1.1rem; margin-bottom: 10px; cursor: pointer; min-height: 50px; }
+        .product-image { width: 100%; height: 200px; object-fit: contain; border-radius: 16px; margin-bottom: 15px; cursor: pointer; background: #fff;}
+        .product-title { font-size: 1.1rem; margin-bottom: 5px; cursor: pointer; min-height: 45px; display: flex; align-items: center; justify-content: center;}
         .product-price { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
-        .wishlist-btn { position: absolute; top: 25px; right: 25px; background: var(--white); width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: var(--text-light); z-index: 10; cursor: pointer;}
+        .wishlist-btn { position: absolute; top: 20px; right: 20px; background: var(--white); width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: var(--text-light); z-index: 10; cursor: pointer;}
         .wishlist-btn.active { color: var(--primary); }
         .wishlist-btn:hover { transform: scale(1.1); }
+        .product-actions { display: flex; flex-direction: column; gap: 10px; }
 
         /* Testimonials */
         .testimonials { background-color: var(--accent); padding: 60px 20px; border-radius: var(--border-radius); margin-top: 60px; }
@@ -90,24 +92,24 @@
         .stars { color: #FBBF24; margin-bottom: 10px; }
 
         /* === SHOP PAGE === */
-        .filters { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-        .filter-btn { padding: 8px 20px; border-radius: 50px; background: var(--white); border: 2px solid var(--secondary); font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .filters { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 18px; border-radius: 50px; background: var(--white); border: 2px solid var(--secondary); font-weight: 600; cursor: pointer; transition: var(--transition); }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
 
         /* === PRODUCT DETAILS PAGE === */
-        .details-container { display: flex; gap: 50px; background: var(--white); padding: 40px; border-radius: var(--border-radius); }
-        .details-image { flex: 1; border-radius: var(--border-radius); width: 100%; max-height: 500px; object-fit: contain; }
-        .details-info { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .details-info h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .details-container { display: flex; gap: 50px; background: var(--white); padding: 40px; border-radius: var(--border-radius); flex-wrap: wrap; }
+        .details-image { flex: 1; border-radius: var(--border-radius); width: 100%; min-width: 300px; max-height: 400px; object-fit: contain; }
+        .details-info { flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 300px; }
+        .details-info h2 { font-size: 2.2rem; margin-bottom: 10px; }
         .details-price { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 20px; }
         .details-desc { color: var(--text-light); line-height: 1.6; margin-bottom: 30px; font-size: 1.1rem; }
         .reviews-section { margin-top: 40px; border-top: 2px dashed var(--secondary); padding-top: 20px;}
 
         /* === CART & CHECKOUT PAGE === */
         .cart-grid, .checkout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-        .cart-items { background: var(--white); padding: 30px; border-radius: var(--border-radius); }
-        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
-        .cart-item img { width: 80px; height: 80px; border-radius: 12px; object-fit: cover; }
+        .cart-items { background: var(--white); padding: 30px; border-radius: var(--border-radius); overflow-x: auto;}
+        .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; min-width: 400px;}
+        .cart-item img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; }
         .cart-item-info { flex: 1; margin-left: 20px; }
         .cart-summary { background: var(--secondary); padding: 30px; border-radius: var(--border-radius); height: fit-content; }
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1.1rem; }
@@ -115,19 +117,27 @@
 
         /* Forms */
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
         .form-control { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 12px; font-family: 'Quicksand'; outline: none; }
         .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(244,114,182,0.2); }
         .checkout-form { background: var(--white); padding: 30px; border-radius: var(--border-radius); }
 
-        /* === ABOUT & CONTACT === */
-        .text-center-box { background: var(--white); padding: 50px; border-radius: var(--border-radius); text-align: center; max-width: 800px; margin: 0 auto; }
+        /* === ABOUT, CONTACT, SUCCESS === */
+        .text-center-box { background: var(--white); padding: 50px 20px; border-radius: var(--border-radius); text-align: center; max-width: 800px; margin: 0 auto; }
         .contact-form { max-width: 600px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: var(--border-radius); }
+
+        /* Success Animation */
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0;} 80% { transform: scale(1.2); opacity: 1;} 100% { transform: scale(1); } }
+        .success-icon { color: #10B981; font-size: 6rem; margin-bottom: 20px; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* === TOAST NOTIFICATION === */
+        .toast-container { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: var(--text-dark); color: var(--white); padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; gap: 10px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2000; }
+        .toast-container.show { bottom: 40px; }
 
         /* === MODAL (Login/Signup) === */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition); }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .auth-modal { background: var(--white); padding: 40px; border-radius: var(--border-radius); width: 400px; position: relative; transform: translateY(-20px); transition: var(--transition); }
+        .auth-modal { background: var(--white); padding: 40px; border-radius: var(--border-radius); width: 90%; max-width: 400px; position: relative; transform: translateY(-20px); transition: var(--transition); }
         .modal-overlay.active .auth-modal { transform: translateY(0); }
         .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-light); }
         .auth-tabs { display: flex; margin-bottom: 30px; border-bottom: 2px solid #eee; }
@@ -136,7 +146,7 @@
 
         /* === FOOTER === */
         footer { background: var(--white); padding: 60px 0 20px; margin-top: 60px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 40px; }
         .footer-col h3 { margin-bottom: 20px; color: var(--primary); }
         .footer-col ul li { margin-bottom: 10px; color: var(--text-light); cursor: pointer; }
         .footer-col ul li:hover { color: var(--primary); }
@@ -146,16 +156,29 @@
         .newsletter { display: flex; gap: 10px; margin-top: 15px; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #eee; color: var(--text-light); font-size: 0.9rem; }
 
-        /* === RESPONSIVE DESIGN === */
+        /* === RESPONSIVE MOBILE DESIGN === */
         @media (max-width: 900px) {
-            .hero { flex-direction: column; text-align: center; }
-            .cart-grid, .checkout-grid, .details-container { grid-template-columns: 1fr; }
-            .testimonial-grid, .footer-grid { grid-template-columns: 1fr 1fr; }
-            .nav-links { display: none; }
-        }
-        @media (max-width: 600px) {
-            .testimonial-grid, .footer-grid { grid-template-columns: 1fr; }
+            .hero { flex-direction: column; text-align: center; padding: 30px 0; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .cart-grid, .checkout-grid { grid-template-columns: 1fr; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+            
+            /* Mobile Navigation */
+            .nav-links { display: flex; flex-direction: column; position: absolute; top: 70px; left: -100%; width: 100%; background: var(--white); box-shadow: 0 10px 10px rgba(0,0,0,0.05); transition: 0.3s; padding: 20px 0; z-index: 99; text-align: center;}
+            .nav-links.active { left: 0; }
+            .menu-toggle { display: block; margin-right: 15px; }
             .search-bar { display: none; }
+        }
+
+        @media (max-width: 500px) {
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+            .product-image { height: 140px; }
+            .product-title { font-size: 0.95rem; min-height: 40px; }
+            .product-price { font-size: 1.1rem; }
+            .btn { padding: 8px 12px; font-size: 0.85rem; }
+            .wishlist-btn { width: 30px; height: 30px; top: 10px; right: 10px; }
+            .section-title { font-size: 2rem; }
+            .details-container { padding: 20px; }
         }
     </style>
 </head>
@@ -169,15 +192,18 @@
     <!-- HEADER -->
     <header>
         <div class="container nav-container">
-            <div class="logo" onclick="navigateTo('home')">
-                <i class="fas fa-cat"></i> Pawdi
+            <div style="display: flex; align-items: center;">
+                <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
+                <div class="logo" onclick="navigateTo('home')">
+                    <i class="fas fa-cat"></i> Pawdi
+                </div>
             </div>
             
-            <ul class="nav-links">
-                <li><a onclick="navigateTo('home')">Home</a></li>
-                <li><a onclick="navigateTo('shop')">Shop</a></li>
-                <li><a onclick="navigateTo('about')">About Us</a></li>
-                <li><a onclick="navigateTo('contact')">Contact</a></li>
+            <ul class="nav-links" id="mobile-menu">
+                <li><a onclick="navigateTo('home'); toggleMenu();">Home</a></li>
+                <li><a onclick="navigateTo('shop'); toggleMenu();">Shop</a></li>
+                <li><a onclick="navigateTo('about'); toggleMenu();">About Us</a></li>
+                <li><a onclick="navigateTo('contact'); toggleMenu();">Contact</a></li>
             </ul>
 
             <div class="nav-icons">
@@ -192,6 +218,12 @@
         </div>
     </header>
 
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast-container">
+        <i class="fas fa-check-circle" style="color: #4ADE80;"></i>
+        <span id="toast-msg">Item added to cart!</span>
+    </div>
+
     <main class="container">
         <!-- 1. HOME VIEW -->
         <section id="home" class="page active fade-in">
@@ -199,7 +231,7 @@
                 <div class="hero-content">
                     <h1>Spoil Your Furry Friends Today! 🐾</h1>
                     <p>Premium food, engaging toys, and cozy accessories designed for the happiness of your dogs and cats.</p>
-                    <button class="btn btn-primary" onclick="navigateTo('shop')">Shop Now <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-primary" style="width: auto;" onclick="navigateTo('shop')">Shop Now <i class="fas fa-arrow-right"></i></button>
                 </div>
                 <div class="hero-image">
                     <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Happy Dogs">
@@ -262,9 +294,10 @@
                     <div class="details-price" id="detail-price">₹0</div>
                     <p class="details-desc">A premium product designed keeping your pet's health and happiness in mind. Made with high-quality, pet-safe materials.</p>
                     
-                    <div style="display: flex; gap: 15px; margin-top: 20px;">
-                        <button class="btn btn-primary" id="detail-add-btn">Add to Cart <i class="fas fa-cart-plus"></i></button>
-                        <button class="btn btn-outline" id="detail-wish-btn"><i class="far fa-heart"></i></button>
+                    <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+                        <button class="btn btn-outline" id="detail-add-btn" style="flex: 1; min-width: 140px;">Add to Cart <i class="fas fa-cart-plus"></i></button>
+                        <button class="btn btn-primary" id="detail-buy-btn" style="flex: 1; min-width: 140px;">Buy Now <i class="fas fa-bolt"></i></button>
+                        <button class="btn btn-outline" id="detail-wish-btn" style="width: auto;"><i class="far fa-heart"></i></button>
                     </div>
 
                     <div class="reviews-section">
@@ -273,7 +306,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-outline" style="margin-top: 30px;" onclick="navigateTo('shop')"><i class="fas fa-arrow-left"></i> Back to Shop</button>
+            <button class="btn btn-outline" style="margin-top: 30px; width: auto;" onclick="navigateTo('shop')"><i class="fas fa-arrow-left"></i> Back to Shop</button>
         </section>
 
         <!-- 4. CART VIEW -->
@@ -289,7 +322,7 @@
                     <div class="summary-row"><span>Shipping</span> <span id="cart-shipping">₹0</span></div>
                     <div class="summary-total summary-row"><span>Total</span> <span id="cart-total">₹0</span></div>
                     <p style="font-size: 0.8rem; color: var(--primary); text-align: center; margin-bottom: 15px;" id="shipping-msg"></p>
-                    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="navigateTo('checkout')">Proceed to Checkout</button>
+                    <button class="btn btn-primary" onclick="navigateTo('checkout')">Proceed to Checkout</button>
                 </div>
             </div>
         </section>
@@ -298,25 +331,24 @@
         <section id="checkout" class="page">
             <h2 class="section-title">Checkout</h2>
             <div class="checkout-grid">
-                
                 <div class="checkout-form">
                     <h3 style="margin-bottom: 20px;">Shipping Details</h3>
-                    <div style="display: flex; gap: 20px;">
-                        <div class="form-group" style="flex: 1;"><label>First Name</label><input type="text" id="chk-fname" class="form-control" placeholder="John"></div>
-                        <div class="form-group" style="flex: 1;"><label>Last Name</label><input type="text" id="chk-lname" class="form-control" placeholder="Doe"></div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 1; min-width: 120px;"><label>First Name</label><input type="text" id="chk-fname" class="form-control" placeholder="John"></div>
+                        <div class="form-group" style="flex: 1; min-width: 120px;"><label>Last Name</label><input type="text" id="chk-lname" class="form-control" placeholder="Doe"></div>
                     </div>
                     <div class="form-group"><label>Email</label><input type="email" id="chk-email" class="form-control" placeholder="john@example.com"></div>
                     <div class="form-group"><label>Address</label><input type="text" id="chk-address" class="form-control" placeholder="123 Pet Street, Apartment 4"></div>
-                    <div style="display: flex; gap: 20px;">
-                        <div class="form-group" style="flex: 1;"><label>City</label><input type="text" id="chk-city" class="form-control" placeholder="Mumbai"></div>
-                        <div class="form-group" style="flex: 1;"><label>Zip Code</label><input type="text" id="chk-zip" class="form-control" placeholder="400001"></div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 1; min-width: 120px;"><label>City</label><input type="text" id="chk-city" class="form-control" placeholder="Mumbai"></div>
+                        <div class="form-group" style="flex: 1; min-width: 120px;"><label>Zip Code</label><input type="text" id="chk-zip" class="form-control" placeholder="400001"></div>
                     </div>
                     
                     <h3 style="margin-bottom: 20px; margin-top: 30px;">Payment Method</h3>
                     <div class="form-group"><label>Card Number</label><input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX"></div>
-                    <div style="display: flex; gap: 20px;">
-                        <div class="form-group" style="flex: 1;"><label>Expiry</label><input type="text" class="form-control" placeholder="MM/YY"></div>
-                        <div class="form-group" style="flex: 1;"><label>CVV</label><input type="password" class="form-control" placeholder="***"></div>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div class="form-group" style="flex: 1; min-width: 120px;"><label>Expiry</label><input type="text" class="form-control" placeholder="MM/YY"></div>
+                        <div class="form-group" style="flex: 1; min-width: 120px;"><label>CVV</label><input type="password" class="form-control" placeholder="***"></div>
                     </div>
                 </div>
 
@@ -324,14 +356,26 @@
                     <h3 style="margin-bottom: 20px;">Final Review</h3>
                     <div class="summary-total summary-row"><span>Amount to Pay</span> <span id="checkout-total">₹0</span></div>
                     
-                    <button class="btn btn-primary" id="place-order-btn" style="width: 100%; justify-content: center; margin-top: 20px;" onclick="placeOrder()">
+                    <button class="btn btn-primary" id="place-order-btn" style="margin-top: 20px;" onclick="placeOrder()">
                         Place Order <i class="fas fa-check-circle"></i>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- 6. ABOUT VIEW -->
+        <!-- 6. ORDER SUCCESS PAGE (NEW) -->
+        <section id="order-success" class="page">
+            <div class="text-center-box">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2 style="font-size: 2.5rem; margin-bottom: 10px; color: var(--text-dark);">Order Confirmed! 🎉</h2>
+                <p style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px;">
+                    Thank you for shopping with Pawdi. Your furry friend will absolutely love their new goodies!
+                </p>
+                <button class="btn btn-primary" style="width: auto;" onclick="navigateTo('home')">Continue Shopping <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <!-- 7. ABOUT VIEW -->
         <section id="about" class="page">
             <div class="text-center-box">
                 <i class="fas fa-heart" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
@@ -342,14 +386,14 @@
             </div>
         </section>
 
-        <!-- 7. CONTACT VIEW -->
+        <!-- 8. CONTACT VIEW -->
         <section id="contact" class="page">
             <div class="contact-form">
                 <h2 style="text-align: center; margin-bottom: 30px;">Say Hello! <i class="fas fa-paw" style="color:var(--primary)"></i></h2>
                 <div class="form-group"><label>Your Name</label><input type="text" class="form-control" placeholder="Enter your name"></div>
                 <div class="form-group"><label>Email</label><input type="email" class="form-control" placeholder="woof@example.com"></div>
                 <div class="form-group"><label>Message</label><textarea class="form-control" rows="5" placeholder="How can we help you?"></textarea></div>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center;">Send Message</button>
+                <button class="btn btn-primary">Send Message</button>
             </div>
         </section>
     </main>
@@ -388,9 +432,9 @@
                 <div class="footer-col">
                     <h3>Join the Pack</h3>
                     <p style="color: var(--text-light); margin-bottom: 10px;">Subscribe to our newsletter for pawsome updates & offers.</p>
-                    <div class="newsletter">
+                    <div class="newsletter" style="display: flex;">
                         <input type="email" class="form-control" placeholder="Email address" style="flex:1;">
-                        <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        <button class="btn btn-primary" style="width: auto; padding: 12px 20px;"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
@@ -412,14 +456,14 @@
             <div id="form-login">
                 <div class="form-group"><label>Email</label><input type="email" class="form-control"></div>
                 <div class="form-group"><label>Password</label><input type="password" class="form-control"></div>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="alert('Logged in successfully!'); toggleModal('auth-modal')">Login</button>
+                <button class="btn btn-primary" style="margin-top: 10px;" onclick="showToast('Logged in successfully!'); toggleModal('auth-modal')">Login</button>
             </div>
 
             <div id="form-signup" class="hidden">
                 <div class="form-group"><label>Full Name</label><input type="text" class="form-control"></div>
                 <div class="form-group"><label>Email</label><input type="email" class="form-control"></div>
                 <div class="form-group"><label>Password</label><input type="password" class="form-control"></div>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="alert('Account created!'); toggleModal('auth-modal')">Sign Up</button>
+                <button class="btn btn-primary" style="margin-top: 10px;" onclick="showToast('Account created!'); toggleModal('auth-modal')">Sign Up</button>
             </div>
         </div>
     </div>
@@ -470,10 +514,10 @@
             { id: 40, name: "Robo Dance Smart Toy (Advanced)", price: 1999, category: "toy", animal: "dog", img: "img-40.jpg" }
         ];
 
-        let cart = [];
+        let cart =[];
         let wishlist =[];
 
-        // --- ROUTING / NAVIGATION ---
+        // --- NAVIGATION & MOBILE MENU ---
         function navigateTo(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
@@ -485,7 +529,26 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if(pageId === 'shop') renderProducts(products, 'shop-products');
-            if(pageId === 'cart') updateCartUI();
+            if(pageId === 'cart' || pageId === 'checkout') updateCartUI(); // Ensures total is calculated
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+
+        // --- CUSTOM TOAST ANIMATION ---
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         // --- RENDERING PRODUCTS ---
@@ -503,12 +566,13 @@
                 const card = `
                     <div class="product-card">
                         <i class="${isWished} fa-heart wishlist-btn" onclick="toggleWishlist(${item.id}, event)"></i>
-                        <img src="${item.img}" alt="${item.name}" class="product-image" onerror="this.src='https://via.placeholder.com/300x300?text=Image+Missing'" onclick="viewProduct(${item.id})">
+                        <img src="${item.img}" alt="${item.name}" class="product-image" onerror="this.src='https://via.placeholder.com/300x300?text=Pawdi+Product'" onclick="viewProduct(${item.id})">
                         <h3 class="product-title" onclick="viewProduct(${item.id})">${item.name}</h3>
                         <p class="product-price">₹${item.price}</p>
-                        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="addToCart(${item.id})">
-                            Add to Cart <i class="fas fa-cart-plus"></i>
-                        </button>
+                        <div class="product-actions">
+                            <button class="btn btn-outline" onclick="addToCart(${item.id})">Add to Cart</button>
+                            <button class="btn btn-primary" onclick="buyNow(${item.id})">Buy Now <i class="fas fa-bolt"></i></button>
+                        </div>
                     </div>
                 `;
                 container.innerHTML += card;
@@ -538,12 +602,13 @@
         function viewProduct(id) {
             const product = products.find(p => p.id === id);
             document.getElementById('detail-img').src = product.img;
-            document.getElementById('detail-img').onerror = function() { this.src='https://via.placeholder.com/600x600?text=Image+Missing'; }; 
+            document.getElementById('detail-img').onerror = function() { this.src='https://via.placeholder.com/600x600?text=Pawdi+Product'; }; 
             
             document.getElementById('detail-name').innerText = product.name;
             document.getElementById('detail-price').innerText = `₹${product.price}`;
             
             document.getElementById('detail-add-btn').onclick = () => addToCart(id);
+            document.getElementById('detail-buy-btn').onclick = () => buyNow(id);
             
             const wishBtn = document.getElementById('detail-wish-btn');
             wishBtn.innerHTML = wishlist.includes(id) ? '<i class="fas fa-heart" style="color:var(--primary)"></i>' : '<i class="far fa-heart"></i>';
@@ -556,7 +621,7 @@
         }
 
         // --- CART LOGIC ---
-        function addToCart(id) {
+        function addToCart(id, redirect = false) {
             const product = products.find(p => p.id === id);
             const existingItem = cart.find(item => item.id === id);
             
@@ -564,13 +629,22 @@
             else cart.push({ ...product, quantity: 1 });
             
             updateCartCount();
-            alert(`${product.name} added to cart! 🐾`);
+            
+            if(!redirect) {
+                showToast(`${product.name} added to cart!`);
+            }
+        }
+
+        function buyNow(id) {
+            addToCart(id, true); // add without showing toast
+            navigateTo('checkout'); // jump straight to checkout
         }
 
         function removeFromCart(id) {
             cart = cart.filter(item => item.id !== id);
             updateCartCount();
             updateCartUI();
+            showToast("Item removed from cart.");
         }
 
         function updateCartCount() {
@@ -602,7 +676,7 @@
                             <h4>${item.name}</h4>
                             <p style="color:var(--primary); font-weight:bold;">₹${item.price} x ${item.quantity}</p>
                         </div>
-                        <button class="btn btn-outline" style="padding: 8px; border-radius: 8px;" onclick="removeFromCart(${item.id})">
+                        <button class="btn btn-outline" style="padding: 8px; width: auto; border-radius: 8px;" onclick="removeFromCart(${item.id})">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -625,16 +699,12 @@
         }
 
         // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
-        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
-        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
-        // --- CHECKOUT & GOOGLE SCRIPT INTEGRATION ---
         function placeOrder() {
             if(cart.length === 0) {
-                alert("Your cart is empty!");
+                showToast("Your cart is empty!");
                 return;
             }
 
-            // 1. Gather all data from the form
             const fName = document.getElementById('chk-fname').value.trim();
             const lName = document.getElementById('chk-lname').value.trim();
             const email = document.getElementById('chk-email').value.trim();
@@ -643,17 +713,15 @@
             const zip = document.getElementById('chk-zip').value.trim();
 
             if(!fName || !lName || !email || !address || !city || !zip) {
-                alert("Please fill out all Shipping Details before placing the order.");
+                showToast("Please fill out all Shipping Details.");
                 return;
             }
 
-            // 2. Format Products string and Calculate Total
             const productString = cart.map(item => `${item.name} (x${item.quantity})`).join(", ");
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const shipping = subtotal > 499 ? 0 : 50;
             const totalAmount = subtotal + shipping;
 
-            // 3. Create a clean JSON data package
             const payload = {
                 FirstName: fName,
                 LastName: lName,
@@ -665,24 +733,21 @@
                 TotalAmount: `₹${totalAmount}`
             };
 
-            // 4. Update UI
             const btn = document.getElementById('place-order-btn');
             btn.innerHTML = "Processing... <i class='fas fa-spinner fa-spin'></i>";
             btn.disabled = true;
 
-            // 5. Send POST Request as plain text so the browser allows it
             const scriptURL = "https://script.google.com/macros/s/AKfycby0HqxiymNb5nk38o0zw3fWf1YHCSbKFBNUFmMWZv2zQARbXTtzKkY_jDmbeOT0ZU5HOw/exec";
             
             fetch(scriptURL, {
                 method: "POST",
                 mode: "no-cors",
-                headers: {
-                    "Content-Type": "text/plain"
-                },
+                headers: { "Content-Type": "text/plain" },
                 body: JSON.stringify(payload)
             })
             .then(() => {
-                alert("Order Placed Successfully! Thank you for shopping at Pawdi 🐾");
+                // Success: Navigate to the beautiful Order Success animation page
+                navigateTo('order-success');
                 
                 // Clear Cart & Inputs
                 cart =[];
@@ -695,18 +760,17 @@
                 document.getElementById('chk-address').value = "";
                 document.getElementById('chk-city').value = "";
                 document.getElementById('chk-zip').value = "";
-
-                navigateTo('home');
             })
             .catch(error => {
                 console.error('Error!', error);
-                alert("Something went wrong. Please try again.");
+                showToast("Something went wrong. Please try again.");
             })
             .finally(() => {
                 btn.innerHTML = "Place Order <i class='fas fa-check-circle'></i>";
                 btn.disabled = false;
             });
         }
+
         // --- WISHLIST LOGIC ---
         function toggleWishlist(id, event) {
             event.stopPropagation();
